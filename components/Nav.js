@@ -12,6 +12,7 @@ const links = [
   { href: "/services", label: "שירותים" },
   { href: "/portfolio", label: "פרויקטים" },
   { href: "/listings", label: "הנכסים שלי" },
+  { href: "/testimonials", label: "חוות דעת" },
   { href: "/contact", label: "יצירת קשר" },
 ];
 
