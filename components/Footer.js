@@ -51,6 +51,7 @@ export default function Footer() {
             <li><Link className="hover:text-brand-gold" href="/about">אודות</Link></li>
             <li><Link className="hover:text-brand-gold" href="/services">שירותים</Link></li>
             <li><Link className="hover:text-brand-gold" href="/portfolio">פרויקטים</Link></li>
+            <li><Link className="hover:text-brand-gold" href="/listings">הנכסים שלי</Link></li>
             <li><Link className="hover:text-brand-gold" href="/contact">יצירת קשר</Link></li>
           </ul>
         </div>
