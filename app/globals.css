@@ -1,0 +1,32 @@
+@import "tailwindcss";
+
+:root {
+  --brand-black: #0a0a0a;
+  --brand-cream: #faf8f4;
+  --brand-white: #ffffff;
+  --brand-gold: #c9a227;
+  --brand-red: #9c1c1c;
+}
+
+@theme inline {
+  --color-brand-black: var(--brand-black);
+  --color-brand-cream: var(--brand-cream);
+  --color-brand-white: var(--brand-white);
+  --color-brand-gold: var(--brand-gold);
+  --color-brand-red: var(--brand-red);
+  --font-sans: var(--font-heebo);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--brand-cream);
+  color: var(--brand-black);
+}
+
+::selection {
+  background: var(--brand-gold);
+  color: var(--brand-black);
+}
