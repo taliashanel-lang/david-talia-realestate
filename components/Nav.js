@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import { Menu, X, Phone } from "lucide-react";
@@ -40,9 +41,11 @@ export default function Nav() {
       }`}
     >
       <nav className="mx-auto flex max-w-6xl items-center justify-between px-5 py-4 lg:px-8">
-        <Link href="/" className="text-xl font-bold tracking-tight text-white" dir="ltr">
-          David<span className="text-brand-gold">&</span>talia
-          <span className="ms-1 hidden text-xs font-normal text-white/50 sm:inline">| נדל&quot;ן</span>
+        <Link href="/" className="flex items-center gap-2.5">
+          <span className="relative block h-11 w-11 shrink-0 overflow-hidden rounded-full">
+            <Image src="/logo.jpg" alt={site.fullName} fill sizes="44px" className="object-cover" priority />
+          </span>
+          <span className="hidden text-sm font-semibold text-white/80 sm:inline">{site.fullName}</span>
         </Link>
 
         <ul className="hidden items-center gap-8 lg:flex">

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Phone, Mail } from "lucide-react";
 import { FacebookIcon, InstagramIcon } from "@/components/SocialIcons";
 import { site, telHref } from "@/lib/site";
@@ -10,8 +11,8 @@ export default function Footer() {
     <footer className="border-t border-white/10 bg-brand-black text-white/70">
       <div className="mx-auto grid max-w-6xl gap-10 px-5 py-14 sm:grid-cols-2 lg:grid-cols-4 lg:px-8">
         <div>
-          <div className="text-xl font-bold text-white">
-            David<span className="text-brand-gold">&</span>talia
+          <div className="relative h-16 w-16 overflow-hidden rounded-full">
+            <Image src="/logo.jpg" alt={site.fullName} fill sizes="64px" className="object-cover" />
           </div>
           <p className="mt-3 text-sm leading-6">{site.tagline}</p>
           <div className="mt-4 flex gap-3">
