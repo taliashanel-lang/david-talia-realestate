@@ -114,14 +114,15 @@ export default async function AdminPage() {
           </div>
 
           <div>
-            <label htmlFor="image" className="mb-1.5 block text-sm font-medium text-black/70">
-              תמונה
+            <label htmlFor="images" className="mb-1.5 block text-sm font-medium text-black/70">
+              תמונות (אפשר לבחור כמה שרוצים בבת אחת)
             </label>
             <input
-              id="image"
-              name="image"
+              id="images"
+              name="images"
               type="file"
               accept="image/*"
+              multiple
               className="w-full rounded-xl border border-black/15 px-4 py-2.5 text-sm outline-none focus:border-brand-gold"
             />
           </div>
@@ -151,9 +152,9 @@ export default async function AdminPage() {
               key={listing.id}
               className="flex items-center gap-4 rounded-xl border border-black/10 bg-white p-4"
             >
-              {listing.image_url ? (
+              {listing.image_urls?.[0] ? (
                 <div className="relative h-16 w-20 shrink-0 overflow-hidden rounded-lg">
-                  <Image src={listing.image_url} alt={listing.title} fill className="object-cover" />
+                  <Image src={listing.image_urls[0]} alt={listing.title} fill className="object-cover" />
                 </div>
               ) : (
                 <div className="h-16 w-20 shrink-0 rounded-lg bg-black/5" />
@@ -163,6 +164,7 @@ export default async function AdminPage() {
                 <p className="text-sm text-black/50">
                   {categories.find((c) => c.slug === listing.category)?.label ?? listing.category}
                   {listing.area ? ` · ${listing.area}` : ""}
+                  {listing.image_urls?.length ? ` · ${listing.image_urls.length} תמונות` : ""}
                 </p>
               </div>
               <form action={deleteListing.bind(null, listing.id)}>

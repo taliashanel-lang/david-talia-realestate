@@ -1,0 +1,126 @@
+import Image from "next/image";
+import Link from "next/link";
+import { notFound } from "next/navigation";
+import { ArrowRight, Phone } from "lucide-react";
+import FadeIn from "@/components/FadeIn";
+import { getSupabasePublic, isSupabaseConfigured } from "@/lib/supabase";
+import { categories } from "@/data/categories";
+import { site, telHref } from "@/lib/site";
+
+export const dynamic = "force-dynamic";
+
+async function getListing(id) {
+  if (!isSupabaseConfigured()) return null;
+  const supabase = getSupabasePublic();
+  const { data, error } = await supabase.from("listings").select("*").eq("id", id).single();
+  if (error || !data) return null;
+  return data;
+}
+
+export async function generateMetadata({ params }) {
+  const { id } = await params;
+  const listing = await getListing(id);
+  if (!listing) return {};
+  return {
+    title: listing.title,
+    description: listing.summary || site.description,
+  };
+}
+
+export default async function ListingDetailPage({ params }) {
+  const { id } = await params;
+  const listing = await getListing(id);
+  if (!listing) notFound();
+
+  const images = listing.image_urls ?? [];
+  const categoryLabel = categories.find((c) => c.slug === listing.category)?.label ?? listing.category;
+
+  return (
+    <>
+      <section className="relative flex h-[45vh] min-h-[320px] items-end overflow-hidden bg-brand-black text-white">
+        {images[0] && (
+          <Image
+            src={images[0]}
+            alt={listing.title}
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover opacity-50"
+          />
+        )}
+        <div className="absolute inset-0 bg-gradient-to-t from-brand-black via-brand-black/40 to-transparent" />
+        <div className="relative mx-auto w-full max-w-6xl px-5 pb-10 lg:px-8">
+          <span className="mb-3 inline-block rounded-full bg-brand-gold px-3 py-1 text-xs font-semibold text-brand-black">
+            {categoryLabel}
+          </span>
+          <h1 className="max-w-2xl text-3xl font-extrabold tracking-tight sm:text-4xl">{listing.title}</h1>
+          {listing.area && <p className="mt-2 text-white/70">{listing.area}</p>}
+        </div>
+      </section>
+
+      <section className="px-5 py-16 lg:px-8">
+        <div className="mx-auto grid max-w-6xl gap-12 lg:grid-cols-3">
+          <FadeIn className="lg:col-span-2">
+            {listing.summary && (
+              <>
+                <h2 className="mb-4 text-2xl font-extrabold tracking-tight text-brand-black">אודות הנכס</h2>
+                <p className="mb-8 whitespace-pre-line text-base leading-7 text-black/65">{listing.summary}</p>
+              </>
+            )}
+
+            {images.length > 0 && (
+              <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
+                {images.map((img, i) => (
+                  <div key={img + i} className="relative h-40 overflow-hidden rounded-xl">
+                    <Image
+                      src={img}
+                      alt={`${listing.title} - תמונה ${i + 1}`}
+                      fill
+                      loading="lazy"
+                      sizes="(max-width: 768px) 50vw, 33vw"
+                      className="object-cover transition-transform duration-500 hover:scale-110"
+                    />
+                  </div>
+                ))}
+              </div>
+            )}
+          </FadeIn>
+
+          <FadeIn delay={100}>
+            <div className="rounded-2xl bg-brand-black p-8 text-white">
+              <h3 className="mb-2 text-lg font-bold">מתעניינים בנכס הזה?</h3>
+              <p className="mb-6 text-sm leading-6 text-white/70">
+                נשמח לתת לכם את כל הפרטים ולתאם ביקור. השאירו פרטים ונחזור אליכם.
+              </p>
+              <div className="space-y-3">
+                <Link
+                  href="/contact"
+                  className="block w-full rounded-full bg-brand-gold px-5 py-3 text-center text-sm font-semibold text-brand-black transition-transform hover:scale-105"
+                >
+                  יצירת קשר
+                </Link>
+                <a
+                  href={telHref(site.phones[0].number)}
+                  className="flex w-full items-center justify-center gap-2 rounded-full border border-white/25 px-5 py-3 text-sm font-semibold text-white transition-colors hover:border-brand-gold hover:text-brand-gold"
+                >
+                  <Phone size={16} />
+                  {site.phones[0].number}
+                </a>
+              </div>
+            </div>
+          </FadeIn>
+        </div>
+
+        <div className="mx-auto mt-14 max-w-6xl">
+          <Link
+            href="/listings"
+            className="inline-flex items-center gap-2 text-sm font-semibold text-brand-black transition-colors hover:text-brand-gold"
+          >
+            <ArrowRight size={16} />
+            חזרה לכל הנכסים
+          </Link>
+        </div>
+      </section>
+    </>
+  );
+}

@@ -27,16 +27,16 @@ export async function addListing(formData) {
   const category = String(formData.get("category") || "").trim();
   const area = String(formData.get("area") || "").trim();
   const summary = String(formData.get("summary") || "").trim();
-  const file = formData.get("image");
+  const files = formData.getAll("images").filter((f) => f && typeof f === "object" && f.size > 0);
 
   if (!title || !category) {
     throw new Error("חובה למלא כותרת וקטגוריה");
   }
 
   const admin = getSupabaseAdmin();
-  let image_url = null;
+  const image_urls = [];
 
-  if (file && typeof file === "object" && file.size > 0) {
+  for (const file of files) {
     const ext = (file.name?.split(".").pop() || "jpg").toLowerCase();
     const path = `${crypto.randomUUID()}.${ext}`;
     const buffer = Buffer.from(await file.arrayBuffer());
@@ -45,10 +45,10 @@ export async function addListing(formData) {
       .upload(path, buffer, { contentType: file.type || "image/jpeg" });
     if (uploadError) throw new Error(uploadError.message);
     const { data } = admin.storage.from(LISTINGS_BUCKET).getPublicUrl(path);
-    image_url = data.publicUrl;
+    image_urls.push(data.publicUrl);
   }
 
-  const { error } = await admin.from("listings").insert({ title, category, area, summary, image_url });
+  const { error } = await admin.from("listings").insert({ title, category, area, summary, image_urls });
   if (error) throw new Error(error.message);
 
   revalidatePath("/admin");

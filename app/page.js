@@ -54,6 +54,9 @@ export default function Home() {
             <h1 className="mx-auto max-w-4xl text-4xl font-extrabold leading-tight tracking-tight sm:text-5xl lg:text-6xl">
               David<span className="text-brand-gold">&amp;</span>talia
             </h1>
+            <p className="mt-2 text-sm font-semibold tracking-[0.3em] text-white/70 sm:text-base">
+              REAL ESTATE
+            </p>
           </FadeIn>
           <FadeIn delay={200}>
             <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-white/80 sm:text-xl">
@@ -61,7 +64,12 @@ export default function Home() {
             </p>
           </FadeIn>
           <FadeIn delay={300}>
-            <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
+            <div className="relative mx-auto mt-8 h-16 w-16 overflow-hidden rounded-full ring-2 ring-brand-gold/40">
+              <Image src="/logo.jpg" alt={site.fullName} fill sizes="64px" className="object-cover" />
+            </div>
+          </FadeIn>
+          <FadeIn delay={400}>
+            <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
               <a
                 href={telHref(site.phones[0].number)}
                 className="flex w-full items-center justify-center gap-2 rounded-full bg-brand-gold px-8 py-4 text-base font-semibold text-brand-black transition-transform hover:scale-105 sm:w-auto"
