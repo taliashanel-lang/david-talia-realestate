@@ -5,7 +5,7 @@ import { CheckCircle2, ArrowLeft } from "lucide-react";
 import PageHero from "@/components/PageHero";
 import FadeIn from "@/components/FadeIn";
 import { services } from "@/data/services";
-import { unsplashUrl } from "@/data/projects";
+import { unsplashUrl } from "@/lib/unsplash";
 import { site } from "@/lib/site";
 
 export const metadata = {

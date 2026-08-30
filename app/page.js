@@ -3,9 +3,8 @@ import Image from "next/image";
 import { Phone, ShieldCheck, Users, Handshake, Clock3, ArrowLeft } from "lucide-react";
 import FadeIn from "@/components/FadeIn";
 import ServiceCard from "@/components/ServiceCard";
-import ProjectCard from "@/components/ProjectCard";
 import { services } from "@/data/services";
-import { projects, unsplashUrl } from "@/data/projects";
+import { unsplashUrl } from "@/lib/unsplash";
 import { site, telHref } from "@/lib/site";
 
 const values = [
@@ -71,10 +70,10 @@ export default function Home() {
                 התקשרו עכשיו
               </a>
               <Link
-                href="/portfolio"
+                href="/listings"
                 className="flex w-full items-center justify-center gap-2 rounded-full border border-white/30 px-8 py-4 text-base font-semibold text-white transition-colors hover:border-brand-gold hover:text-brand-gold sm:w-auto"
               >
-                לצפייה בפרויקטים
+                לצפייה בנכסים שלי
               </Link>
             </div>
           </FadeIn>
@@ -131,33 +130,6 @@ export default function Home() {
             {services.map((service, i) => (
               <FadeIn key={service.slug} delay={i * 80}>
                 <ServiceCard service={service} href={`/services#${service.slug}`} />
-              </FadeIn>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="px-5 py-20 lg:px-8">
-        <div className="mx-auto max-w-6xl">
-          <FadeIn className="mb-14 flex flex-col items-center justify-between gap-4 text-center sm:flex-row sm:text-right">
-            <div>
-              <p className="mb-3 text-sm font-semibold tracking-widest text-brand-red">תיק עבודות</p>
-              <h2 className="text-3xl font-extrabold tracking-tight text-brand-black sm:text-4xl">
-                פרויקטים נבחרים
-              </h2>
-            </div>
-            <Link
-              href="/portfolio"
-              className="inline-flex items-center gap-2 text-sm font-semibold text-brand-black transition-colors hover:text-brand-gold"
-            >
-              לכל הפרויקטים
-              <ArrowLeft size={16} />
-            </Link>
-          </FadeIn>
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {projects.slice(0, 3).map((project, i) => (
-              <FadeIn key={project.slug} delay={i * 80}>
-                <ProjectCard project={project} />
               </FadeIn>
             ))}
           </div>

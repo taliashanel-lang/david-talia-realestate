@@ -2,7 +2,7 @@ import Image from "next/image";
 import { Trash2, LogOut, ImagePlus, AlertTriangle } from "lucide-react";
 import { requireAdmin } from "@/lib/admin-auth";
 import { getSupabaseAdmin, isSupabaseConfigured } from "@/lib/supabase";
-import { categories } from "@/data/projects";
+import { categories } from "@/data/categories";
 import { addListing, deleteListing, logout } from "./actions";
 
 export const metadata = {

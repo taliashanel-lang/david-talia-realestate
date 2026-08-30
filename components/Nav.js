@@ -10,7 +10,6 @@ const links = [
   { href: "/", label: "בית" },
   { href: "/about", label: "אודות" },
   { href: "/services", label: "שירותים" },
-  { href: "/portfolio", label: "פרויקטים" },
   { href: "/listings", label: "הנכסים שלי" },
   { href: "/testimonials", label: "חוות דעת" },
   { href: "/contact", label: "יצירת קשר" },

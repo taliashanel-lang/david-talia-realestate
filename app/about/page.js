@@ -2,7 +2,7 @@ import Image from "next/image";
 import { ShieldCheck, Users, Handshake, Clock3 } from "lucide-react";
 import PageHero from "@/components/PageHero";
 import FadeIn from "@/components/FadeIn";
-import { unsplashUrl } from "@/data/projects";
+import { unsplashUrl } from "@/lib/unsplash";
 import { site } from "@/lib/site";
 
 export const metadata = {

@@ -4,7 +4,7 @@ import { Home, Phone, MessageCircle } from "lucide-react";
 import PageHero from "@/components/PageHero";
 import FadeIn from "@/components/FadeIn";
 import { getSupabasePublic, isSupabaseConfigured } from "@/lib/supabase";
-import { categories } from "@/data/projects";
+import { categories } from "@/data/categories";
 import { site, telHref } from "@/lib/site";
 
 export const metadata = {

@@ -56,7 +56,7 @@ export default function ContactPage() {
                   <Clock3 size={20} className="mt-0.5 text-brand-gold" />
                   <div>
                     <p className="text-sm font-semibold text-brand-black">זמינות</p>
-                    <p className="text-black/60">א&apos;-ה&apos; 09:00–19:00, ו&apos; עד הצהריים</p>
+                    <p className="text-black/60">א&apos;-ה&apos; 08:00–20:00, ו&apos; 08:00–14:00</p>
                   </div>
                 </li>
               </ul>
